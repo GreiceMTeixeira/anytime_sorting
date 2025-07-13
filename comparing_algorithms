@@ -1,0 +1,35 @@
+todas_as_listas = []
+for i in range(5):
+    lista_aleatoria = [random.randint(0, 1000) for _ in range(100)]
+    todas_as_listas.append(lista_aleatoria)
+
+tempos_corsort = []
+tempos_multizip = []
+
+for i, lista in enumerate(todas_as_listas):
+    # Corsort
+    inicio = time.perf_counter()
+    ordenada_corsort = corsort(lista)
+    fim = time.perf_counter()
+    tempo_corsort = fim - inicio
+    tempos_corsort.append(tempo_corsort)
+
+for i, lista in enumerate(todas_as_listas):
+    # Multizip
+    inicio = time.perf_counter()
+    ordenada_multizip = multizip_sort(lista)
+    fim = time.perf_counter()
+    tempo_multizip = fim - inicio
+    tempos_multizip.append(tempo_multizip)
+
+print("--- Tempos por Lista ---")
+for i in range(5):
+    print(f"Lista {i+1}: Corsort = {tempos_corsort[i]:.6f} s | Multizip = {tempos_multizip[i]:.6f} s")
+
+tempo_total_corsort = sum(tempos_corsort)
+tempo_total_multizip = sum(tempos_multizip)
+print("\n--- Comparação Final ---")
+if tempo_total_corsort < tempo_total_multizip:
+    print(f"**Corsort foi mais rápido no total: {tempo_total_corsort:.6f} s vs {tempo_total_multizip:.6f} s**")
+else:
+    print(f"**Multizip foi mais rápido no total: {tempo_total_multizip:.6f} s vs {tempo_total_corsort:.6f} s**")
