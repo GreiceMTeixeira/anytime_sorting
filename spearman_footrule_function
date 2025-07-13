@@ -1,0 +1,5 @@
+def spearman_footrule(estimate, true_sorted):
+    n = len(estimate)
+    rank_estimate = rankdata(estimate, method='ordinal')
+    rank_true = rankdata(true_sorted, method='ordinal')
+    return sum(abs(rank_estimate[i] - rank_true[i]) for i in range(n))
